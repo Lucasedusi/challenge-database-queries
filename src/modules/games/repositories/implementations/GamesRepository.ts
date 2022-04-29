@@ -12,11 +12,11 @@ export class GamesRepository implements IGamesRepository {
     this.repository = getRepository(Game);
   }
 
-  async findByTitleContaining(param: string): Promise<Game[]> {
+  async findByTitleContaining(title: string): Promise<Game[]> {
     return this.repository
       .createQueryBuilder("games")
       .where("LOWER(games.title) LIKE LOWER(:title)", {
-        title: `%${param}%`,
+        title: `%${title}%`,
       })
       .getMany();
   }
